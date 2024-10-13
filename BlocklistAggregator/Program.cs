@@ -9,27 +9,29 @@ public class Program
       Blocklist blocklist = new Blocklist();
 
       string url = "https://v.firebog.net/hosts/Easyprivacy.txt";
-      Console.WriteLine( $"{PrecisionTime()} - Downloading {url}" );
-      string content = await DownloadTextFileAsync( url );
-      Console.WriteLine( $"{PrecisionTime()} - Stripping Content" );
-      string strippedContent = StripIPsAndComments( content );
-      Console.WriteLine( $"{PrecisionTime()} - Removing Duplicates" );
-      AddBlockListResult result = blocklist.AddList( strippedContent );
-      Console.WriteLine( $"{PrecisionTime()} - {result}" );
+      await AddBlocklistFromUrl( url, blocklist );
 
       url = "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt";
-      Console.WriteLine( $"{PrecisionTime()} - Downloading {url}" );
-      content = await DownloadTextFileAsync( url );
-      Console.WriteLine( $"{PrecisionTime()} - Stripping Content" );
-      strippedContent = StripIPsAndComments( content );
-      Console.WriteLine( $"{PrecisionTime()} - Removing Duplicates" );
-      blocklist.AddList( strippedContent );
-      Console.WriteLine( $"{PrecisionTime()} - {result}" );
+      await AddBlocklistFromUrl( url, blocklist );
    }
 
-   public static string PrecisionTime()
+   private static async Task<AddBlockListResult> AddBlocklistFromUrl( string url, Blocklist blocklist )
    {
-      return $"{DateTime.Now:HH:mm:ss.fffffff}";
+      Log( $"Downloading {url}" );
+      string content = await DownloadTextFileAsync( url );
+      Log( "Stripping Content" );
+      string strippedContent = StripIPsAndComments( content );
+      Log( "Removing Duplicates" );
+      AddBlockListResult result = blocklist.AddList( strippedContent );
+      Log( result.ToString() );
+      return result;
+   }
+
+   public static string Log( string message )
+   {
+      string logStatement = $"{DateTime.Now:HH:mm:ss.fffffff} - {message}";
+      Console.WriteLine( logStatement );
+      return logStatement;
    }
 
    public static async Task<string> DownloadTextFileAsync( string url )
