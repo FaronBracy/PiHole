@@ -8,13 +8,18 @@ public class Program
    {
       Blocklist blocklist = new Blocklist();
 
-      string url = "https://v.firebog.net/hosts/Easyprivacy.txt";
-      await AddBlocklistFromUrl( url, blocklist );
+      string[] urls = new string[]
+      {
+         "https://v.firebog.net/hosts/Easyprivacy.txt",
+         "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt"
+      };
 
-      url = "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt";
-      await AddBlocklistFromUrl( url, blocklist );
+      foreach ( string url in urls )
+      {
+         await AddBlocklistFromUrl( url, blocklist );
+      }
    }
-
+   
    private static async Task<AddBlockListResult> AddBlocklistFromUrl( string url, Blocklist blocklist )
    {
       Log( $"Downloading {url}" );
