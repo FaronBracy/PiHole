@@ -17,7 +17,7 @@ public class Program
          "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt",
          "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts",
          "https://v.firebog.net/hosts/static/w3kbl.txt"
-      
+
       };
 
       string[] advertisingLists = new string[]
@@ -95,15 +95,13 @@ public class Program
 
       blocklist.WriteToFile( "dns-block-aggregate" );
    }
-   
+
    private static async Task<AddBlockListResult> AddBlocklistFromUrl( string url, Blocklist blocklist )
    {
       Log( $"Downloading {url}" );
       string content = await DownloadTextFileAsync( url );
-      Log( "Stripping Content" );
-      string strippedContent = StripIPsAndComments( content );
-      Log( "Removing Duplicates" );
-      AddBlockListResult result = blocklist.AddList( strippedContent );
+      Log( "Cleaning up and Removing Duplicates" );
+      AddBlockListResult result = blocklist.AddList( content );
       Log( result.ToString() );
       return result;
    }
@@ -132,18 +130,7 @@ public class Program
       }
    }
 
-   public static string StripIPsAndComments( string content )
-   {
-      // Use a regular expression to remove IP addresses and leading whitespace
-      string ipPattern = @"^\s*\d{1,3}(\.\d{1,3}){3}\s+";
-      string withoutIPs = Regex.Replace( content, ipPattern, "", RegexOptions.Multiline );
 
-      // Use a regular expression to remove lines starting with #
-      string commentPattern = @"^\s*#.*(\r?\n|$)";
-      string result = Regex.Replace( withoutIPs, commentPattern, "", RegexOptions.Multiline );
-
-      return result;
-   }
 }
 
 public class Blocklist
@@ -158,12 +145,16 @@ public class Blocklist
       string[] lines = content.Split( '\n' );
       foreach ( string line in lines )
       {
-         if ( string.IsNullOrWhiteSpace( line ) )
+         if ( CanSkip( line ) )
          {
             continue;
          }
 
-         bool result = _uniqueBlocklist.Add( line.Trim() );
+         string cleanedLine = StripIPs( line );
+         cleanedLine = ReplaceJunk( cleanedLine );
+         cleanedLine = StripAllWhitespace( cleanedLine );
+
+         bool result = _uniqueBlocklist.Add( cleanedLine.ToLowerInvariant() );
          if ( result )
          {
             itemsAdded++;
@@ -181,6 +172,79 @@ public class Blocklist
       };
    }
 
+   public bool CanSkip( string contentLine )
+   {
+      if ( string.IsNullOrWhiteSpace( contentLine ) )
+      {
+         return true;
+      }
+
+      if ( contentLine.StartsWith( "#" ) )
+      {
+         return true;
+      }
+
+      if ( contentLine.Contains( ':' ) )
+      {
+         return true;
+      }
+
+      if ( contentLine.Contains( ';' ) )
+      {
+         return true;
+      }
+
+      if ( contentLine.Contains( '_' ) )
+      {
+         return true;
+      }
+
+      if ( contentLine.Contains( '!' ) )
+      {
+         return true;
+      }
+
+      return false;
+   }
+   /* Filtering Rules based on junk in files
+      null or whitespace - delete entire line
+      CNAME . at the end - delete CNAME .
+      || at the start - delete ||
+      ^ at the end - delete ^
+      ::1 localhost - delete entire line
+      *. at the start - delete *.
+      ; at the start - delete entire line
+      any whitespace - delete
+      _ in the domain anywhere - delete the entire line
+      0.0.0.0 at the start delete 0.0.0.0
+   */
+
+   public string StripIPs( string contentLine )
+   {
+      // Use a regular expression to remove IP addresses and leading whitespace
+      string ipPattern = @"^\s*\d{1,3}(\.\d{1,3}){3}\s+";
+      string withoutIPs = Regex.Replace( contentLine, ipPattern, "", RegexOptions.Multiline );
+      return withoutIPs;
+   }
+
+   public string ReplaceJunk( string contentLine )
+   {
+      contentLine = contentLine.Replace( "CNAME .", string.Empty, StringComparison.OrdinalIgnoreCase );
+      contentLine = contentLine.Replace( "*.", string.Empty, StringComparison.OrdinalIgnoreCase );
+      contentLine = contentLine.Replace( "||", string.Empty, StringComparison.OrdinalIgnoreCase );
+      contentLine = contentLine.Replace( "^", string.Empty, StringComparison.OrdinalIgnoreCase );
+      contentLine = contentLine.Replace( "0.0.0.0", string.Empty, StringComparison.OrdinalIgnoreCase );
+      return contentLine;
+   }
+
+   public string StripAllWhitespace( string contentLine )
+   {
+      // Use a regular expression to remove all whitespace characters
+      string pattern = @"\s+";
+      string result = Regex.Replace( contentLine, pattern, string.Empty );
+      return result;
+   }
+   
    public string WriteToFile( string fileName )
    {
       fileName = $"{fileName}-{DateTime.Now:MM-dd-yyyy}.txt";
