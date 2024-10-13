@@ -179,33 +179,11 @@ public class Blocklist
          return true;
       }
 
-      if ( contentLine.StartsWith( "#" ) )
-      {
-         return true;
-      }
-
-      if ( contentLine.Contains( ':' ) )
-      {
-         return true;
-      }
-
-      if ( contentLine.Contains( ';' ) )
-      {
-         return true;
-      }
-
-      if ( contentLine.Contains( '_' ) )
-      {
-         return true;
-      }
-
-      if ( contentLine.Contains( '!' ) )
-      {
-         return true;
-      }
-
-      return false;
+      // Use a regular expression to check for the specified characters
+      string pattern = @"[#:;_!@$]";
+      return Regex.IsMatch( contentLine, pattern );
    }
+
    /* Filtering Rules based on junk in files
       null or whitespace - delete entire line
       CNAME . at the end - delete CNAME .
