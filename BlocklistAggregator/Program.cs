@@ -17,7 +17,6 @@ public class Program
          "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt",
          "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts",
          "https://v.firebog.net/hosts/static/w3kbl.txt"
-
       };
 
       string[] advertisingLists = new string[]
@@ -41,21 +40,22 @@ public class Program
         "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.2o7Net/hosts",
         "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt",
         "https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt",
-        "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.amazon.txt",
-        "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.apple.txt",
-        "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.huawei.txt",
-        "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.winoffice.txt",
-        "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.tiktok.extended.txt",
-        "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.lgwebos.txt",
-        "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.vivo.txt",
-        "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.oppo-realme.txt",
-        "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.xiaomi.txt"
+        "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.amazon.txt",
+        "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
+        "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.huawei.txt",
+        "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt",
+        "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt",
+        "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.lgwebos.txt",
+        "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.vivo.txt",
+        "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.oppo-realme.txt",
+        "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.xiaomi.txt"
       };
 
       string[] maliciousLists = new string[]
       {
          "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt",
-         "https://osint.digitalside.it/Threat-Intel/lists/latestdomains.txt",
+         //"https://osint.digitalside.it/Threat-Intel/lists/latestdomains.txt",
+         "https://raw.githubusercontent.com/davidonzo/Threat-Intel/refs/heads/master/lists/latestdomains.txt", // one above no longer working
          "https://v.firebog.net/hosts/Prigent-Crypto.txt",
          "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Risk/hosts",
          "https://bitbucket.org/ethanr/dns-blacklists/raw/8575c9f96e5b4a1308f2f12394abd86d0927a4a0/bad_lists/Mandiant_APT1_Report_Appendix_D.txt",
@@ -222,7 +222,7 @@ public class Blocklist
       string result = Regex.Replace( contentLine, pattern, string.Empty );
       return result;
    }
-   
+
    public string WriteToFile( string fileName )
    {
       fileName = $"{fileName}-{DateTime.Now:MM-dd-yyyy}.txt";
@@ -245,130 +245,131 @@ public class AddBlockListResult
 
 
 /*
-07:51:20.1981320 - Downloading https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt
-   07:51:20.6550992 - Cleaning up and Removing Duplicates
-   07:51:20.8410680 - ItemsAdded: 82796, DuplicateItems: 4
-   07:51:20.8413621 - Downloading https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts
-   07:51:20.9388892 - Cleaning up and Removing Duplicates
-   07:51:20.9391933 - ItemsAdded: 57, DuplicateItems: 0
-   07:51:20.9392603 - Downloading https://v.firebog.net/hosts/static/w3kbl.txt
-   07:51:21.1022960 - Cleaning up and Removing Duplicates
-   07:51:21.1028526 - ItemsAdded: 350, DuplicateItems: 5
-   07:51:21.1029119 - Downloading https://adaway.org/hosts.txt
-   07:51:21.4004532 - Cleaning up and Removing Duplicates
-   07:51:21.4111443 - ItemsAdded: 6486, DuplicateItems: 55
-   07:51:21.4112431 - Downloading https://v.firebog.net/hosts/AdguardDNS.txt
-   07:51:21.5681592 - Cleaning up and Removing Duplicates
-   07:51:21.6488732 - ItemsAdded: 56575, DuplicateItems: 1034
-   07:51:21.6489874 - Downloading https://v.firebog.net/hosts/Admiral.txt
-   07:51:21.7480863 - Cleaning up and Removing Duplicates
-   07:51:21.7490356 - ItemsAdded: 866, DuplicateItems: 24
-   07:51:21.7490840 - Downloading https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
-   07:51:22.0241805 - Cleaning up and Removing Duplicates
-   07:51:22.0825549 - ItemsAdded: 39623, DuplicateItems: 2898
-   07:51:22.0826650 - Downloading https://v.firebog.net/hosts/Easylist.txt
-   07:51:22.2163151 - Cleaning up and Removing Duplicates
-   07:51:22.2328686 - ItemsAdded: 336, DuplicateItems: 29658
-   07:51:22.2329785 - Downloading https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext
-   07:51:22.7733860 - Cleaning up and Removing Duplicates
-   07:51:22.7766222 - ItemsAdded: 1971, DuplicateItems: 1566
-   07:51:22.7766757 - Downloading https://raw.githubusercontent.com/FadeMind/hosts.extras/master/UncheckyAds/hosts
-   07:51:22.8682230 - Cleaning up and Removing Duplicates
-   07:51:22.8683448 - ItemsAdded: 8, DuplicateItems: 1
-   07:51:22.8683935 - Downloading https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts
-   07:51:23.0261786 - Cleaning up and Removing Duplicates
-   07:51:23.0633437 - ItemsAdded: 10329, DuplicateItems: 10531
-   07:51:23.0634942 - Downloading https://small.oisd.nl/rpz
-   07:51:24.2781759 - Cleaning up and Removing Duplicates
-   07:51:24.3594395 - ItemsAdded: 8073, DuplicateItems: 83042
-   07:51:24.3595511 - Downloading https://raw.githubusercontent.com/lassekongo83/Frellwits-filter-lists/master/Frellwits-Swedish-Hosts-File.txt
-   07:51:24.4551300 - Cleaning up and Removing Duplicates
-   07:51:24.4563309 - ItemsAdded: 150, DuplicateItems: 944
-   07:51:24.4563853 - Downloading https://v.firebog.net/hosts/Easyprivacy.txt
-   07:51:24.6234544 - Cleaning up and Removing Duplicates
-   07:51:24.6436170 - ItemsAdded: 36736, DuplicateItems: 2634
-   07:51:24.6437073 - Downloading https://v.firebog.net/hosts/Prigent-Ads.txt
-   07:51:24.7503983 - Cleaning up and Removing Duplicates
-   07:51:24.7529901 - ItemsAdded: 1066, DuplicateItems: 2668
-   07:51:24.7530859 - Downloading https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.2o7Net/hosts
-   07:51:24.8736222 - Cleaning up and Removing Duplicates
-   07:51:24.8757677 - ItemsAdded: 1462, DuplicateItems: 568
-   07:51:24.8758508 - Downloading https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt
-   07:51:24.9851429 - Cleaning up and Removing Duplicates
-   07:51:24.9856075 - ItemsAdded: 271, DuplicateItems: 76
-   07:51:24.9856541 - Downloading https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt
-   07:51:26.0373811 - Cleaning up and Removing Duplicates
-   07:51:26.0482035 - ItemsAdded: 12950, DuplicateItems: 1239
-   07:51:26.0482901 - Downloading https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.amazon.txt
-   07:51:26.1658522 - Cleaning up and Removing Duplicates
-   07:51:26.1664052 - ItemsAdded: 466, DuplicateItems: 108
-   07:51:26.1664704 - Downloading https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.apple.txt
-   07:51:26.2526730 - Cleaning up and Removing Duplicates
-   07:51:26.2530273 - ItemsAdded: 308, DuplicateItems: 21
-   07:51:26.2530716 - Downloading https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.huawei.txt
-   07:51:26.3387120 - Cleaning up and Removing Duplicates
-   07:51:26.3388914 - ItemsAdded: 84, DuplicateItems: 13
-   07:51:26.3389368 - Downloading https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.winoffice.txt
-   07:51:26.4270396 - Cleaning up and Removing Duplicates
-   07:51:26.4276948 - ItemsAdded: 581, DuplicateItems: 117
-   07:51:26.4277427 - Downloading https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.tiktok.extended.txt
-   07:51:26.5135036 - Cleaning up and Removing Duplicates
-   07:51:26.5139701 - ItemsAdded: 406, DuplicateItems: 43
-   07:51:26.5140174 - Downloading https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.lgwebos.txt
-   07:51:26.6090866 - Cleaning up and Removing Duplicates
-   07:51:26.6098530 - ItemsAdded: 1085, DuplicateItems: 36
-   07:51:26.6098951 - Downloading https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.vivo.txt
-   07:51:26.6989044 - Cleaning up and Removing Duplicates
-   07:51:26.6990777 - ItemsAdded: 75, DuplicateItems: 16
-   07:51:26.6991336 - Downloading https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.oppo-realme.txt
-   07:51:26.7868154 - Cleaning up and Removing Duplicates
-   07:51:26.7872111 - ItemsAdded: 333, DuplicateItems: 61
-   07:51:26.7872602 - Downloading https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.xiaomi.txt
-   07:51:26.8768011 - Cleaning up and Removing Duplicates
-   07:51:26.8772720 - ItemsAdded: 381, DuplicateItems: 104
-   07:51:26.8773195 - Downloading https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt
-   07:51:27.0551532 - Cleaning up and Removing Duplicates
-   07:51:27.0928303 - ItemsAdded: 20130, DuplicateItems: 5669
-   07:51:27.0931824 - Downloading https://osint.digitalside.it/Threat-Intel/lists/latestdomains.txt
-   07:51:27.5035780 - Cleaning up and Removing Duplicates
-   07:51:27.5037870 - ItemsAdded: 133, DuplicateItems: 0
-   07:51:27.5038300 - Downloading https://v.firebog.net/hosts/Prigent-Crypto.txt
-   07:51:27.6187891 - Cleaning up and Removing Duplicates
-   07:51:27.6284671 - ItemsAdded: 11296, DuplicateItems: 4986
-   07:51:27.6285506 - Downloading https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Risk/hosts
-   07:51:27.7234989 - Cleaning up and Removing Duplicates
-   07:51:27.7255227 - ItemsAdded: 2052, DuplicateItems: 137
-   07:51:27.7255767 - Downloading https://bitbucket.org/ethanr/dns-blacklists/raw/8575c9f96e5b4a1308f2f12394abd86d0927a4a0/bad_lists/Mandiant_APT1_Report_Appendix_D.txt
-   07:51:27.9340720 - Cleaning up and Removing Duplicates
-   07:51:27.9354922 - ItemsAdded: 2046, DuplicateItems: 0
-   07:51:27.9355389 - Downloading https://phishing.army/download/phishing_army_blocklist_extended.txt
-   07:51:28.1896247 - Cleaning up and Removing Duplicates
-   07:51:28.3456205 - ItemsAdded: 218300, DuplicateItems: 38215
-   07:51:28.3460022 - Downloading https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-malware.txt
-   07:51:28.4933003 - Cleaning up and Removing Duplicates
-   07:51:28.4934181 - ItemsAdded: 0, DuplicateItems: 0
-   07:51:28.4934594 - Downloading https://v.firebog.net/hosts/RPiList-Malware.txt
-   07:51:28.8529334 - Cleaning up and Removing Duplicates
-   07:51:29.2942574 - ItemsAdded: 393136, DuplicateItems: 38802
-   07:51:29.2946303 - Downloading https://v.firebog.net/hosts/RPiList-Phishing.txt
-   07:51:29.5780140 - Cleaning up and Removing Duplicates
-   07:51:29.9507994 - ItemsAdded: 165582, DuplicateItems: 254935
-   07:51:29.9511870 - Downloading https://raw.githubusercontent.com/Spam404/lists/master/main-blacklist.txt
-   07:51:30.0717945 - Cleaning up and Removing Duplicates
-   07:51:30.0769011 - ItemsAdded: 8080, DuplicateItems: 61
-   07:51:30.0769565 - Downloading https://raw.githubusercontent.com/AssoEchap/stalkerware-indicators/master/generated/hosts
-   07:51:30.1666292 - Cleaning up and Removing Duplicates
-   07:51:30.1674179 - ItemsAdded: 910, DuplicateItems: 3
-   07:51:30.1674595 - Downloading https://urlhaus.abuse.ch/downloads/hostfile/
-   07:51:30.3301040 - Cleaning up and Removing Duplicates
-   07:51:30.3305227 - ItemsAdded: 80, DuplicateItems: 160
-   07:51:30.3305653 - Downloading https://nsfw.oisd.nl/rpz
-   07:51:32.4048104 - Cleaning up and Removing Duplicates
-   07:51:33.3245801 - ItemsAdded: 479965, DuplicateItems: 483312
-   07:51:33.3246824 - Downloading https://zerodot1.gitlab.io/CoinBlockerLists/hosts_browser
-   07:51:33.6914651 - Cleaning up and Removing Duplicates
-   07:51:33.6948811 - ItemsAdded: 2396, DuplicateItems: 1160
-   07:51:33.6949264 - Downloading https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/gambling-onlydomains.txt
-   07:51:33.9921525 - Cleaning up and Removing Duplicates
-   07:51:34.2897150 - ItemsAdded: 490954, DuplicateItems: 915
+09:48:32.1213405 - Downloading https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt
+09:48:32.6677083 - Cleaning up and Removing Duplicates
+09:48:32.7492788 - ItemsAdded: 43166, DuplicateItems: 2
+09:48:32.7496058 - Downloading https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts
+09:48:32.8723230 - Cleaning up and Removing Duplicates
+09:48:32.8726319 - ItemsAdded: 57, DuplicateItems: 0
+09:48:32.8727154 - Downloading https://v.firebog.net/hosts/static/w3kbl.txt
+09:48:33.0135855 - Cleaning up and Removing Duplicates
+09:48:33.0143293 - ItemsAdded: 351, DuplicateItems: 5
+09:48:33.0144630 - Downloading https://adaway.org/hosts.txt
+09:48:33.4159567 - Cleaning up and Removing Duplicates
+09:48:33.4404358 - ItemsAdded: 6486, DuplicateItems: 55
+09:48:33.4406193 - Downloading https://v.firebog.net/hosts/AdguardDNS.txt
+09:48:33.7217979 - Cleaning up and Removing Duplicates
+09:48:33.9871116 - ItemsAdded: 174810, DuplicateItems: 1053
+09:48:33.9872610 - Downloading https://v.firebog.net/hosts/Admiral.txt
+09:48:34.0916733 - Cleaning up and Removing Duplicates
+09:48:34.0945321 - ItemsAdded: 98, DuplicateItems: 1544
+09:48:34.0946525 - Downloading https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
+09:48:34.4367727 - Cleaning up and Removing Duplicates
+09:48:34.4863845 - ItemsAdded: 39678, DuplicateItems: 2838
+09:48:34.4865404 - Downloading https://v.firebog.net/hosts/Easylist.txt
+09:48:34.6838680 - Cleaning up and Removing Duplicates
+09:48:34.7114870 - ItemsAdded: 68, DuplicateItems: 44126
+09:48:34.7116238 - Downloading https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext
+09:48:35.7090596 - Cleaning up and Removing Duplicates
+09:48:35.7129828 - ItemsAdded: 1748, DuplicateItems: 1794
+09:48:35.7131051 - Downloading https://raw.githubusercontent.com/FadeMind/hosts.extras/master/UncheckyAds/hosts
+09:48:35.8414758 - Cleaning up and Removing Duplicates
+09:48:35.8416581 - ItemsAdded: 8, DuplicateItems: 1
+09:48:35.8417449 - Downloading https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts
+09:48:36.1720364 - Cleaning up and Removing Duplicates
+09:48:36.2000449 - ItemsAdded: 8593, DuplicateItems: 9808
+09:48:36.2002278 - Downloading https://small.oisd.nl/rpz
+09:48:37.6568780 - Cleaning up and Removing Duplicates
+09:48:37.7852326 - ItemsAdded: 3794, DuplicateItems: 117735
+09:48:37.7853521 - Downloading https://raw.githubusercontent.com/lassekongo83/Frellwits-filter-lists/master/Frellwits-Swedish-Hosts-File.txt
+09:48:37.9234995 - Cleaning up and Removing Duplicates
+09:48:37.9248852 - ItemsAdded: 168, DuplicateItems: 987
+09:48:37.9249680 - Downloading https://v.firebog.net/hosts/Easyprivacy.txt
+09:48:38.1419730 - Cleaning up and Removing Duplicates
+09:48:38.1755129 - ItemsAdded: 14018, DuplicateItems: 28983
+09:48:38.1756702 - Downloading https://v.firebog.net/hosts/Prigent-Ads.txt
+09:48:38.3119342 - Cleaning up and Removing Duplicates
+09:48:38.3150932 - ItemsAdded: 1645, DuplicateItems: 2625
+09:48:38.3151862 - Downloading https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.2o7Net/hosts
+09:48:38.7233696 - Cleaning up and Removing Duplicates
+09:48:38.7259680 - ItemsAdded: 1447, DuplicateItems: 583
+09:48:38.7261460 - Downloading https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt
+09:48:38.8276617 - Cleaning up and Removing Duplicates
+09:48:38.8281621 - ItemsAdded: 271, DuplicateItems: 76
+09:48:38.8282186 - Downloading https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt
+09:48:39.7796253 - Cleaning up and Removing Duplicates
+09:48:39.7929369 - ItemsAdded: 12281, DuplicateItems: 2473
+09:48:39.7930722 - Downloading https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.amazon.txt
+09:48:39.9418713 - Cleaning up and Removing Duplicates
+09:48:39.9424982 - ItemsAdded: 258, DuplicateItems: 112
+09:48:39.9426165 - Downloading https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt
+09:48:40.0801408 - Cleaning up and Removing Duplicates
+09:48:40.0803783 - ItemsAdded: 81, DuplicateItems: 28
+09:48:40.0804503 - Downloading https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.huawei.txt
+09:48:40.1992798 - Cleaning up and Removing Duplicates
+09:48:40.1995322 - ItemsAdded: 122, DuplicateItems: 14
+09:48:40.1995944 - Downloading https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt
+09:48:40.3345935 - Cleaning up and Removing Duplicates
+09:48:40.3350539 - ItemsAdded: 314, DuplicateItems: 75
+09:48:40.3351298 - Downloading https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt
+09:48:40.4772353 - Cleaning up and Removing Duplicates
+09:48:40.4780602 - ItemsAdded: 513, DuplicateItems: 100
+09:48:40.4781360 - Downloading https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.lgwebos.txt
+09:48:40.6075797 - Cleaning up and Removing Duplicates
+09:48:40.6080427 - ItemsAdded: 337, DuplicateItems: 5
+09:48:40.6081136 - Downloading https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.vivo.txt
+09:48:40.7484053 - Cleaning up and Removing Duplicates
+09:48:40.7487287 - ItemsAdded: 204, DuplicateItems: 26
+09:48:40.7487893 - Downloading https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.oppo-realme.txt
+09:48:40.9092207 - Cleaning up and Removing Duplicates
+09:48:40.9097751 - ItemsAdded: 471, DuplicateItems: 14
+09:48:40.9098529 - Downloading https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.xiaomi.txt
+09:48:41.0520967 - Cleaning up and Removing Duplicates
+09:48:41.0526436 - ItemsAdded: 277, DuplicateItems: 70
+09:48:41.0527180 - Downloading https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt
+09:48:41.4404823 - Cleaning up and Removing Duplicates
+09:48:41.4510843 - ItemsAdded: 11625, DuplicateItems: 738
+09:48:41.4511719 - Downloading https://raw.githubusercontent.com/davidonzo/Threat-Intel/refs/heads/master/lists/latestdomains.txt
+09:48:41.5902977 - Cleaning up and Removing Duplicates
+09:48:41.5905704 - ItemsAdded: 133, DuplicateItems: 0
+09:48:41.5906193 - Downloading https://v.firebog.net/hosts/Prigent-Crypto.txt
+09:48:41.7489466 - Cleaning up and Removing Duplicates
+09:48:41.7593748 - ItemsAdded: 11325, DuplicateItems: 166
+09:48:41.7595046 - Downloading https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Risk/hosts
+09:48:41.9074239 - Cleaning up and Removing Duplicates
+09:48:41.9096701 - ItemsAdded: 2069, DuplicateItems: 120
+09:48:41.9097405 - Downloading https://bitbucket.org/ethanr/dns-blacklists/raw/8575c9f96e5b4a1308f2f12394abd86d0927a4a0/bad_lists/Mandiant_APT1_Report_Appendix_D.txt
+09:48:42.0774042 - Cleaning up and Removing Duplicates
+09:48:42.0791797 - ItemsAdded: 2046, DuplicateItems: 0
+09:48:42.0793730 - Downloading https://phishing.army/download/phishing_army_blocklist_extended.txt
+09:48:42.3953541 - Cleaning up and Removing Duplicates
+09:48:42.5064862 - ItemsAdded: 138369, DuplicateItems: 18385
+09:48:42.5066105 - Downloading https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-malware.txt
+09:48:42.7091885 - Cleaning up and Removing Duplicates
+09:48:42.7093218 - ItemsAdded: 0, DuplicateItems: 0
+09:48:42.7093613 - Downloading https://v.firebog.net/hosts/RPiList-Malware.txt
+09:48:43.1280564 - Cleaning up and Removing Duplicates
+09:48:43.6000107 - ItemsAdded: 387895, DuplicateItems: 40822
+09:48:43.6001113 - Downloading https://v.firebog.net/hosts/RPiList-Phishing.txt
+09:48:43.8579672 - Cleaning up and Removing Duplicates
+09:48:43.9991968 - ItemsAdded: 3588, DuplicateItems: 155496
+09:48:43.9993022 - Downloading https://raw.githubusercontent.com/Spam404/lists/master/main-blacklist.txt
+09:48:44.1532063 - Cleaning up and Removing Duplicates
+09:48:44.1583774 - ItemsAdded: 8103, DuplicateItems: 37
+09:48:44.1584565 - Downloading https://raw.githubusercontent.com/AssoEchap/stalkerware-indicators/master/generated/hosts
+09:48:44.2972977 - Cleaning up and Removing Duplicates
+09:48:44.2981578 - ItemsAdded: 874, DuplicateItems: 51
+09:48:44.2982169 - Downloading https://urlhaus.abuse.ch/downloads/hostfile/
+09:48:44.5665660 - Cleaning up and Removing Duplicates
+09:48:44.5671463 - ItemsAdded: 73, DuplicateItems: 312
+09:48:44.5672028 - Downloading https://nsfw.oisd.nl/rpz
+09:48:47.1070615 - Cleaning up and Removing Duplicates
+09:48:48.1578065 - ItemsAdded: 490071, DuplicateItems: 491820
+09:48:48.1579181 - Downloading https://zerodot1.gitlab.io/CoinBlockerLists/hosts_browser
+An error occurred: Response status code does not indicate success: 403 (Forbidden).
+09:48:48.7227238 - Cleaning up and Removing Duplicates
+09:48:48.7228090 - ItemsAdded: 0, DuplicateItems: 0
+09:48:48.7228687 - Downloading https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/gambling-onlydomains.txt
+09:48:49.0924279 - Cleaning up and Removing Duplicates
+09:48:49.3837868 - ItemsAdded: 412567, DuplicateItems: 610
  */
